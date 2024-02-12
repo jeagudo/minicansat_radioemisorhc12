@@ -1,14 +1,17 @@
-basic.showIcon(IconNames.SmallHeart)
-let Contador = 0
+input.onButtonPressed(Button.A, function () {
+    serial.writeLine("Prueba")
+})
+let texto = ""
+basic.showIcon(IconNames.Pitchfork)
 serial.redirect(
-SerialPin.P12,
+SerialPin.USB_TX,
 SerialPin.P8,
 BaudRate.BaudRate9600
 )
-loops.everyInterval(1000, function () {
-    Contador += 1
-    serial.writeLine("" + (Contador))
-})
+serial.writeLine("MiniCanSAT 1.0")
 basic.forever(function () {
-	
+    texto = serial.readLine()
+    if (texto != "") {
+        serial.writeLine(texto)
+    }
 })
